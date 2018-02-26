@@ -88,4 +88,89 @@ def str2float(L):
 	return d1/(10**(len(L)-L.find('.')-1))
 	
 print(str2float('12.3456'))	
+
+def not_empty(s):
+	return s and s.strip()
+	
+print(list(filter(not_empty,['A', '', 'B', None, 'C', '  '])))
+
+def _odd_iter():
+	n = 1
+	while True:
+		n = n + 2
+		yield n
+		
+def _not_divisible(n):
+	return lambda x: x % n > 0
+	
+def primes():
+	yield 2
+	it = _odd_iter()
+	while True:
+		n = next(it)
+		yield n
+		it = filter(_not_divisible(n),it)
+		
+# for n in primes():
+	# if n < 1000:
+		# print(n)
+	# else: 
+		# break
+	
+L = list(filter(lambda n: n%2==1,range(1,20)))
+print(L)
+
+def is_palindrome(n):
+	s = str(n)
+	return s == s[::-1]
+
+print(list(filter(is_palindrome,range(1,200))))
+
+print(sorted([36,5,-12,9,-21],key=abs,reverse = True))
+
+def by_name(t):
+	return t[0].lower()
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]	
+
+L2 = sorted(L, key=by_name)
+print(L2)
+
+def by_score(t):
+	return t[1]
+	
+L2 = sorted(L,key = by_score, reverse=True)
+print(L2)
+
+# 函数式编程部分返回函数、装饰器没看懂。
+
+# def createCounter():
+	# n = 0
+	# def counter(n):
+		# return n+1
+	
+	
+	# return counter
+
+# counterA = createCounter()
+# print(counterA(), counterA(), counterA(), counterA(), counterA())
+# counterB = createCounter()
+# print(counterB(), counterB(), counterB(), counterB())
+
+# def log(func):
+	# def wrapper(*args,**kw):
+		# print('call %s():' % func.__name__)
+		# return func(*args,**kw)
+	# return wrapper
+
+# @log
+# def now():
+	# print('2015-3-25')
+	
+# now()
+
+#偏函数实质就是给一个部分参数固定的函数定义新名字的函数，好处是只需要涉及函数名，不用触及函数内部具体内容
+
+
+
+
 	
